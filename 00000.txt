@@ -1,0 +1,66 @@
+#include <iostream>
+using namespace std;
+
+class bst{
+    private:
+    struct Node{
+        int data;
+        Node* le;
+        Node* re;
+
+        Node(int value){
+            data=value;
+            le = re = nullptr;
+        } 
+    };
+    Node* root=nullptr;
+ void addhelp(Node* temp,int value){
+  if(value<=temp->data){
+     if(temp->le==nullptr){
+          temp->le = new Node(value);
+     } else {
+      addhelp(temp->le,value);
+     }
+  }else{
+  if(temp->re==nullptr){
+          temp->re = new Node(value);
+     } else {
+      addhelp(temp->re,value);
+     }
+  }
+  }
+
+public:
+void add(int value){
+    if(root==nullptr){
+root=new Node(value);
+    } else {
+addhelp(root,value);
+    }
+}
+
+void preorder(Node* temp){
+    if(temp==nullptr)
+    return;
+
+    cout<<temp->data<<"  ";
+    preorder(temp->le);
+    preorder(temp->re);
+}
+void display(){
+    if(root!=nullptr)
+    preorder(root);
+}
+};
+
+int main(void){
+    bst obj;
+    obj.add(10);
+     obj.add(7);
+      obj.add(3);
+       obj.add(9);
+        obj.add(15);
+         obj.add(12);
+         obj.display();
+         return 0;
+}
